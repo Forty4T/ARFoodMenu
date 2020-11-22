@@ -27,15 +27,15 @@
   </head>
   <body>
     <model-viewer src="./Food1.glb" shadow-intensity="0.1" ar camera-controls alt="Food carousel">
-  
-  <h1 class="ml8">
+  <img id="icon" src="./icon.png">
+  <!-- <h1 class="ml8">
   <span class="letters-container">
-    <span class="letters letters-left"style="text-align: center; display: inline-block;">Cafe Azzure</span>
+    <span class="letters letters-left"style="text-align: center; display: inline-block;"><img src="./icon.png"></span>
   </span>
   <span class="circle circle-white"></span>
   <span class="circle circle-dark"></span>
   <span class="circle circle-container"><span class="circle circle-dark-dashed"></span></span>
-</h1>
+</h1> -->
   
   <button slot="ar-button" id="ar-button">
     View in your space
@@ -281,7 +281,14 @@ anime({
   box-shadow: 0 1px #1555;
   transform: translateY(4px);
 }
-  
+ 
+ #icon {
+  width: 3em;
+  height: 3em;
+  right: 5px;
+  top: 0.9em;
+   position: absolute;
+} 
   
   h1.ml8 {
   font-weight: 700;
