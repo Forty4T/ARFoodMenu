@@ -24,6 +24,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 
     <link rel="stylesheet" href="ContainerStyle.css" />
+	
   </head>
   <body>
     <model-viewer src="./Food1.glb" shadow-intensity="0.1" ar camera-controls alt="Food carousel">
@@ -45,13 +46,14 @@
 	<div class="SaleButtons">
 	<!--<button class="BuyNow"></button>-->
 	<button class="TasteThis">Taste this</button>
+	<p id="Price">&#x20b9; &nbsp &nbsp </p>
 	</div>
 	
   <div class="slider">
     <div class="slides">
-      <button class="slide selected" onclick="switchSrc(this, 'Food1')" style="display: inline-block; font-size: 12px;">Risotto</button>
-	  <button class="slide" onclick="switchSrc(this, 'Pancake')" style="display: inline-block; font-size: 12px;">Pancake</button>
-	  <button class="slide" onclick="switchSrc(this, 'Takoyaki')" style="display: inline-block; font-size: 12px;">Takoyaki</button>
+      <button class="slide selected" onclick="switchSrc(this, 'Food1');changeText('185');" style="display: inline-block; font-size: 12px;">Risotto</button>
+	  <button class="slide" onclick="switchSrc(this, 'Pancake');changeText('180');" style="display: inline-block; font-size: 12px;">Pancake</button>
+	  <button class="slide" onclick="switchSrc(this, 'Takoyaki');changeText('250');" style="display: inline-block; font-size: 12px;">Takoyaki</button>
 	  </div>
   </div>
 </model-viewer>
@@ -65,7 +67,7 @@
     const slides = document.querySelectorAll(".slide");
     slides.forEach((element) => {element.classList.remove("selected");});
     element.classList.add("selected");
-  };
+	  };
 
   document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
     // Keep slider interactions from affecting the XR scene.
@@ -119,7 +121,12 @@ anime({
   loop: true
 });
 </script>
-
+  <script>
+function changeText(price){
+document.getElementById("Price").innerHTML="&#x20b9; " + price;
+}
+window.onload=changeText('185');
+  </script>
 <style>
   /* This keeps child nodes hidden while the element loads */
   :not(:defined) > * {
@@ -257,6 +264,22 @@ anime({
   background-color: #733D1C;
   box-shadow: 0 1px #1555;
   transform: translateY(4px);
+}
+
+ #Price {
+  z-index:10;
+  padding: 8px 18px;
+  font-size: 11px;
+  text-align: center;
+  outline: none;
+  color: #fff;
+   position: fixed;
+     bottom: 45px;
+    right: 10px;
+  background-color: #c86a4b;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 1px #999;
 }
 
  .TasteThis {
