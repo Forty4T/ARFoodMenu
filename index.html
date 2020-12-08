@@ -27,6 +27,11 @@
 	
   </head>
   <body>
+  
+  
+
+
+  
     <model-viewer src="./Food1.glb" shadow-intensity="0.1" ar camera-controls alt="Food carousel">
   <div id="floating"><img id="icon" src="./icon.png"></div>
   <!-- <h1 class="ml8">
@@ -41,8 +46,15 @@
   <button slot="ar-button" id="ar-button">
     View in AR
   </button>
-
-
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="#" onclick="switchSrc(this, 'Food1');changeText('Risotto','185','Risotto is a northern Italian rice dish cooked with broth until it reaches a creamy consistency. The broth can be derived from meat, fish, or vegetables.');">Risotto</a>
+  <a href="#" onclick="switchSrc(this, 'Pancake');changeText('Pancake','180','A pancake is a flat cake, often thin and round, prepared from a starch-based batter.');">Pancake</a>
+  <a href="#" onclick="switchSrc(this, 'Takoyaki');changeText('Takoyaki','250','Takoyaki is a Japanese snack made of a wheat flour-based batter typically filled with minced octopus, tempura scraps, pickled ginger, and green onion.');">Takoyaki</a>
+</div>
+<div id="main">
+  <button class="openbtn" onclick="openNav()">☰</button>  
+</div>
 	<div class="SaleButtons">
 	<!--<button class="BuyNow"></button>-->
 	<!--<button class="TasteThis">Taste this</button>-->	
@@ -55,14 +67,15 @@
 	</div>
 	
 	 <!-- <button id="slideArrow"  style="display: inline-block; font-size: 12px;">></button>-->
-  <div class="slider">
   
+ <!--  <div class="slider">
     <div class="slides">
       <button class="slide selected" onclick="switchSrc(this, 'Food1');changeText('Risotto','185','Risotto is a northern Italian rice dish cooked with broth until it reaches a creamy consistency. The broth can be derived from meat, fish, or vegetables.');" style="display: inline-block; font-size: 12px;">Risotto</button>
 	  <button class="slide" onclick="switchSrc(this, 'Pancake');changeText('Pancake','180','A pancake is a flat cake, often thin and round, prepared from a starch-based batter.');" style="display: inline-block; font-size: 12px;">Pancake</button>
 	  <button class="slide" onclick="switchSrc(this, 'Takoyaki');changeText('Takoyaki','250','Takoyaki is a Japanese snack made of a wheat flour-based batter typically filled with minced octopus, tempura scraps, pickled ginger, and green onion.');" style="display: inline-block; font-size: 12px;">Takoyaki</button>
 	  </div>
-  </div>
+  
+  </div> -->
 </model-viewer>
 
 <script type="module">
@@ -135,6 +148,17 @@ document.getElementById("itemName").innerHTML=itemName;
 document.getElementById("contentDesc").innerHTML=contentDesc;
 }
 window.onload=changeText('Risotto','185','Risotto is a northern Italian rice dish cooked with broth until it reaches a creamy consistency. The broth can be derived from meat, fish, or vegetables.');
+  
+  
+  function openNav() {
+  document.getElementById("mySidebar").style.width = "125px";
+  <!--document.getElementById("main").style.marginLeft = "250px";-->
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  <!--document.getElementById("main").style.marginLeft= "0";-->
+}
   </script>
 <style>
   /* This keeps child nodes hidden while the element loads */
@@ -410,30 +434,50 @@ top:-0.02735em;
   
 @keyframes floating { 
     0% { transform: translate(0px,  0px); } 
-    50%  { transform: translate(0, 7px); } 
+    50%  { transform: translate(0, 10px); } 
     100%   { transform: translate(0px, -0px); }     
+}
+ 
+#slideIn {
+    position: absolute;
+    left: -100px;
+    width: 100px;
+    height: 100px;
+    background: blue;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slide 0.5s forwards;
+    animation-delay: 2s;
+}
+
+@-webkit-keyframes slideIn {
+    100% { left: 0; }
+}	
+
+@keyframes slideIn {
+    100% { left: 0; }
 }
  
    #itemName {
  z-index:10;
-  font-size: 11px;
+  font-size: 12px;
   text-align: left;
   outline: none;
 
   color: #fff;
    position: absolute;
-     bottom: 55px;
+     bottom: 57px;
     left: 15px;
 }
  
   #Price {
  z-index:10;
-  font-size: 11px;
+  font-size: 12px;
   text-align: left;
   
   color: #fff;
    position: absolute;
-     bottom: 55px;
+     bottom: 57px;
     right: 20px;
 }
  
@@ -445,9 +489,9 @@ top:-0.02735em;
  
   color: #fff;
    position: absolute;
-     top: 30px;
+     top: 26px;
     left: 15px;
-	right:10px;
+	right:11px;
 }
  
 #description{
@@ -463,9 +507,78 @@ top:-0.02735em;
     right: 10px;  
   border: none;
   border-radius: 15px;
-    background:rgba(54,114,255,0.7);
-  backdrop-filter: blur(4px);
+    background:rgba(54,114,255,0.8);
+  backdrop-filter: blur(3px);
 } 
+
+
+
+
+
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 18;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  	    background:rgba(255,255,255,0.85);
+  backdrop-filter: blur(3px);
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 12px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #3672FF;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 22px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 15px;
+  cursor: pointer;
+  background-color: 	#696969;
+  color: white;
+  margin-top:7px;
+  margin-left:-5px;
+  padding: 3px 8px;
+  border: none;
+  border-radius: 3px;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
 </style>
   </body>
 </html>
