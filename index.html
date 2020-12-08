@@ -53,7 +53,8 @@
   <a href="#" onclick="switchSrc(this, 'Takoyaki');changeText('Takoyaki','250','Takoyaki is a Japanese snack made of a wheat flour-based batter typically filled with minced octopus, tempura scraps, pickled ginger, and green onion.');">Takoyaki</a>
 </div>
 <div id="main">
-  <button class="openbtn" onclick="openNav()">☰</button>  
+  <!-- <button class="openbtn" onclick="openNav()">☰</button>   -->
+  <img class="openbtn" src="./food.png" onclick="openNav()"></img>  
 </div>
 	<div class="SaleButtons">
 	<!--<button class="BuyNow"></button>-->
@@ -434,7 +435,7 @@ top:-0.02735em;
   
 @keyframes floating { 
     0% { transform: translate(0px,  0px); } 
-    50%  { transform: translate(0, 10px); } 
+    50%  { transform: translate(0, 11px); } 
     100%   { transform: translate(0px, -0px); }     
 }
  
@@ -555,18 +556,23 @@ top:-0.02735em;
 .openbtn {
   font-size: 15px;
   cursor: pointer;
-  background-color: 	#696969;
-  color: white;
-  margin-top:10%;
+  background-color: 	#fff;
+  color: black;
+  margin-top:128%;
+  width:23px;
+  height:23px;
   margin-left:-5px;
-  padding: 3px 8px;
-  border: none;
-  border-radius: 3px;
+  padding: 4px 8px;
+  border-radius: 15px;
+  border: 1px solid #DADCE0;
+		    background:rgba(255,255,255,0.6);
+  backdrop-filter: blur(3px);
 }
 
-.openbtn:hover {
-  background-color: #444;
-}
+
+.openbtn {
+    outline: none;
+  }
 
 #main {
   transition: margin-left .5s;
