@@ -28,7 +28,7 @@
   </head>
   <body>
     <model-viewer src="./Food1.glb" shadow-intensity="0.1" ar camera-controls alt="Food carousel">
-  <img id="icon" src="./icon.png">
+  <div id="floating"><img id="icon" src="./icon.png"></div>
   <!-- <h1 class="ml8">
   <span class="letters-container">
     <span class="letters letters-left"style="text-align: center; display: inline-block;"><img src="./icon.png"></span>
@@ -39,21 +39,28 @@
 </h1> -->
   
   <button slot="ar-button" id="ar-button">
-    View in your space
+    View in AR
   </button>
 
 
 	<div class="SaleButtons">
 	<!--<button class="BuyNow"></button>-->
-	<button class="TasteThis">Taste this</button>
-	<p id="Price">&#x20b9; &nbsp &nbsp </p>
+	<!--<button class="TasteThis">Taste this</button>-->	
 	</div>
 	
+	<div id="description">
+	<p id="itemName">Risotto</p>
+	<p id="Price">&#x20b9; &nbsp &nbsp </p>
+	<p id="contentDesc"></p>
+	</div>
+	
+	  <button id="slideArrow"  style="display: inline-block; font-size: 12px;">></button>
   <div class="slider">
+  
     <div class="slides">
-      <button class="slide selected" onclick="switchSrc(this, 'Food1');changeText('185');" style="display: inline-block; font-size: 12px;">Risotto</button>
-	  <button class="slide" onclick="switchSrc(this, 'Pancake');changeText('180');" style="display: inline-block; font-size: 12px;">Pancake</button>
-	  <button class="slide" onclick="switchSrc(this, 'Takoyaki');changeText('250');" style="display: inline-block; font-size: 12px;">Takoyaki</button>
+      <button class="slide selected" onclick="switchSrc(this, 'Food1');changeText('Risotto','185','Risotto is a northern Italian rice dish cooked with broth until it reaches a creamy consistency. The broth can be derived from meat, fish, or vegetables.');" style="display: inline-block; font-size: 12px;">Risotto</button>
+	  <button class="slide" onclick="switchSrc(this, 'Pancake');changeText('Pancake','180','A pancake is a flat cake, often thin and round, prepared from a starch-based batter.');" style="display: inline-block; font-size: 12px;">Pancake</button>
+	  <button class="slide" onclick="switchSrc(this, 'Takoyaki');changeText('Takoyaki','250','Takoyaki is a Japanese snack made of a wheat flour-based batter typically filled with minced octopus, tempura scraps, pickled ginger, and green onion.');" style="display: inline-block; font-size: 12px;">Takoyaki</button>
 	  </div>
   </div>
 </model-viewer>
@@ -122,10 +129,12 @@ anime({
 });
 </script>
   <script>
-function changeText(price){
+function changeText(itemName,price,contentDesc){
 document.getElementById("Price").innerHTML="&#x20b9; " + price;
+document.getElementById("itemName").innerHTML=itemName;
+document.getElementById("contentDesc").innerHTML=contentDesc;
 }
-window.onload=changeText('185');
+window.onload=changeText('Risotto','185','Risotto is a northern Italian rice dish cooked with broth until it reaches a creamy consistency. The broth can be derived from meat, fish, or vegetables.');
   </script>
 <style>
   /* This keeps child nodes hidden while the element loads */
@@ -137,7 +146,9 @@ window.onload=changeText('185');
     background-color: #eee;
     --poster-color: #eee;
   }
-
+body{
+ font-family: Roboto Regular, Helvetica Neue, sans-serif;
+}
   
   #ar-button {
     background-repeat: no-repeat;
@@ -145,17 +156,20 @@ window.onload=changeText('185');
     background-position: 12px 50%;
     background-color: #fff;
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 100px;
+    right: 10px;
+    
+    bottom: 15px;
 	display: inline-block;
+	padding-left:10px;
+	padding-right:10px;
     font-family: Roboto Regular, Helvetica Neue, sans-serif;
     font-size: 12px;
     color:#4285f4;
     height: 36px;
-    line-height: 36px;
-    border-radius: 18px;
+    border-radius: 12px;
     border: 1px solid #DADCE0;
+		    background:rgba(255,255,255,0.6);
+  backdrop-filter: blur(3px);
   }
 
   #ar-button:active {
@@ -196,6 +210,24 @@ window.onload=changeText('185');
     animation: circle 4s linear infinite;
   }
 
+  #slideArrow {
+    
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+	 color:#4285f4;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+	position:absolute;
+	left:10px;
+	bottom:26px;
+	opacity:0.3;
+  }
+  
   .slider {
     width: 100%;
     text-align: center;
@@ -209,6 +241,7 @@ window.onload=changeText('185');
   .slides {
     display: flex;
     overflow-x: auto;
+	 color:#4285f4;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -223,6 +256,9 @@ window.onload=changeText('185');
     background-repeat: no-repeat;
     background-position: center;
     background-color: #fff;
+	 color:#4285f4;
+	    background:rgba(255,255,255,0.6);
+  backdrop-filter: blur(3px);
     margin-right: 10px;
     border-radius: 10px;
     border: none;
@@ -231,6 +267,7 @@ window.onload=changeText('185');
 
   .slide.selected {
     border: 2px solid #4285f4;
+	 color:#4285f4;
   }
 
   .slide:focus {
@@ -266,21 +303,7 @@ window.onload=changeText('185');
   transform: translateY(4px);
 }
 
- #Price {
-  z-index:10;
-  padding: 8px 18px;
-  font-size: 11px;
-  text-align: center;
-  outline: none;
-  color: #fff;
-   position: fixed;
-     bottom: 45px;
-    right: 10px;
-  background-color: #c86a4b;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 1px #999;
-}
+
 
  .TasteThis {
   z-index:10;
@@ -306,10 +329,10 @@ window.onload=changeText('185');
 }
  
  #icon {
-  width: 3em;
-  height: 3em;
+  width: 4.5em;
+  height: 4.5em;
   right: 5px;
-  top: 0.9em;
+  top: 0.2em;
    position: absolute;
 } 
   
@@ -374,7 +397,75 @@ top:-0.02735em;
   width: 2.4em;
   height: 2.4em;
 }
+ 
+ #floating {   
+    animation-name: floating; 
+    animation-duration: 5s; 
+    animation-iteration-count: infinite; 
+    animation-timing-function: ease-in-out; 
+    margin-left: 30px; 
+    margin-top: 5px; 
+} 
   
+@keyframes floating { 
+    0% { transform: translate(0px,  0px); } 
+    50%  { transform: translate(0, 7px); } 
+    100%   { transform: translate(0px, -0px); }     
+}
+ 
+   #itemName {
+ z-index:10;
+  font-size: 11px;
+  text-align: left;
+  outline: none;
+  text-shadow: 0px 1px #A9A9A9;
+  color: #fff;
+   position: absolute;
+     bottom: 55px;
+    left: 15px;
+}
+ 
+  #Price {
+ z-index:10;
+  font-size: 11px;
+  text-align: left;
+   text-shadow: 0px 1px #A9A9A9;
+  color: #fff;
+   position: absolute;
+     bottom: 55px;
+    right: 20px;
+}
+ 
+   #contentDesc {
+ z-index:10;
+  font-size: 9px;
+  text-align: left;
+  outline: none;
+  text-shadow: 0px 1px #A9A9A9;
+  color: #fff;
+   position: absolute;
+     top: 30px;
+    left: 15px;
+	right:10px;
+}
+ 
+#description{
+  z-index:10;
+  width:150px;
+  height:80px;
+  padding: 8px 18px;
+  font-size: 11px;
+  text-align: center;
+  outline: none;
+   position: fixed;
+     bottom: 68px;
+    right: 10px;  
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 1px #999;
+    background:rgba(54,114,255,0.3);
+  backdrop-filter: blur(4px);
+} 
 </style>
   </body>
 </html>
